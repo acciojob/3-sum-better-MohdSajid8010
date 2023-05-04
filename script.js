@@ -1,50 +1,23 @@
-// function threeSum(arr, target) {
-// // write your code here
-// 	arr.sort((a,b)=>a-b);
-
-// 	let potetialSum;
-// 	let minDiff=Number.MAX_VALUE;
-// 	for(let i=0; i<=arr.length-3 ; i++){
-// 		let sum =arr[i]+arr[i+1]+arr[i+2];
-// 		let dif=Math.abs(sum - target);
-// 		if(dif<minDiff)
-// 		{
-// 			minDiff=dif;
-// 			potetialSum = sum;
-// 		}
-// 	}
-// 	return potetialSum;
-  
-// }
-
-// module.exports = threeSum;
-
-
-
-
-
-function threeSum(arr, target) {
-// write your code here
-  
-  arr.sort((a, b) => a - b);
-  let potetialSum;
-	let minDiff=Number.MAX_VALUE;
-  for (let i = 0; i <=arr.length - 3; i++) {
-    let k = arr.length - 1;
-	  
-    while (i+1 < k)
-		{
-      let sum = arr[i] + arr[i+1] + arr[k];
-		let dif=Math.abs(sum - target);
-      if (dif < minDiff)
-	  {
-		  minDiff=dif;
-        potetialSum = sum;
-      }
-     k--;
-    }
-	  
-  }
-  return potetialSum;
+function threeSum(nums, target) {
+nums.sort((a, b) => a - b);
+let closestSum = Infinity;
+for (let i = 0; i < nums.length - 2; i++) {
+let left = i + 1;
+let right = nums.length - 1;
+while (left < right) {
+let sum = nums[i] + nums[left] + nums[right];
+if (Math.abs(target - sum) < Math.abs(target - closestSum)) {
+closestSum = sum; // update the closest sum
 }
- module.exports = threeSum;
+if (sum < target) {
+left++;
+} else if (sum > target) {
+right--;
+} else {
+return closestSum;
+}
+}
+}
+return closestSum;
+}
+module.exports = threeSum;
